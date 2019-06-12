@@ -1,6 +1,6 @@
 <%if @tweet.present?%>
   <%= render 'tweet', tweet: @tweet, has_retweet: @has_retweet, retweet: @retweet %>
-  <h1>Replies</h1>
+  <h3>Replies</h3>
   <% @replies.each do |reply|%>
     <%= render 'tweet', tweet: reply, has_retweet: false, retweet: false %>
   <%end%>

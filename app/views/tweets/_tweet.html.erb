@@ -30,7 +30,7 @@
     <% end %>
     <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary" %>
     <% if current_user.id == tweet.user_id %>
-      <%= link_to 'Delete', tweet_path(tweet.id), method: :delete, :class => "btn btn-danger" %>
+      <%= link_to '🗑️', tweet_path(tweet.id), method: :delete, :class => "btn btn-danger" %>
     <% end %>
     <%= link_to 'See more', tweet_path(tweet), :class => "btn btn-outline-primary" %>
   </div>
