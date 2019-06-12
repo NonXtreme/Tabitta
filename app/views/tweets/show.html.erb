@@ -1,0 +1,15 @@
+<%if @tweet.present?%>
+  <%= render 'tweet', tweet: @tweet, has_retweet: @has_retweet, retweet: @retweet %>
+  <h1>Replies</h1>
+  <% @replies.each do |reply|%>
+    <%= render 'tweet', tweet: reply, has_retweet: false, retweet: false %>
+  <%end%>
+  <%= flash[:fail] %>
+  <%= simple_form_for @reply, url: tweet_replies_path(tweet_id:params[:id]), method: :post do |f| %>
+    <%= f.input :content, label: false, as: :text, row: 5, col: 20,
+        input_html: { class: 'form-group', rows: 5, cols: 40 } %>
+    <%= f.button :submit, "Reply", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <h1>404 Not Found</h1>
+<% end %>

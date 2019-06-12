@@ -1,0 +1,8 @@
+<h1>Retweets</h1>
+<%= render '/tweets/tweet', tweet: @tweet, has_retweet: false %>
+<%= flash[:fail] %>
+<%= simple_form_for @retweet, url: tweet_retweets_path, method: :post do |f| %>
+  <%= f.input :content, label: false, as: :text, row: 5, col: 20,
+      input_html: { class: 'form-group', rows: 5, cols: 40 } %>
+  <%= f.button :submit, "Retweet", class: "btn btn-primary" %>
+<% end %>

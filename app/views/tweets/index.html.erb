@@ -1,0 +1,14 @@
+<h1>Tweets</h1>
+<%= flash[:fail] %>
+<%= simple_form_for :tweet, url: tweets_path, method: :post do |f| %>
+  <%= f.input :content, label: false, as: :text, row: 5, col: 20,
+      input_html: { class: 'form-group', rows: 5, cols: 40 } %>
+  <%= f.button :submit, "Tweet", class: "btn btn-primary" %>
+<% end %>
+<% @tweets.each do |tweet|%>
+  <% if has_retweet = tweet.retweet_id.present? %>
+      <% retweet = Tweet.find_by(id: tweet.retweet_id)%>
+  <% end %>
+  <%= render 'tweet', tweet: tweet, has_retweet: has_retweet, retweet: retweet %>
+<%end%>
+<%= paginate @tweets %>

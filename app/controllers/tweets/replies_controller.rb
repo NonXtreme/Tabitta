@@ -1,0 +1,17 @@
+class Tweets::RepliesController < ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @reply = Tweet.create(reply_params)
+    unless @reply.valid?
+      flash[:fail] = "Tweet #{@reply.errors.messages[:content][0]}"
+    end
+    redirect_to tweet_path(params[:tweet_id])
+  end
+
+
+  private
+  def reply_params
+    params.require(:tweet).permit(:content).merge!(reply_id:params[:tweet_id]).merge!(user_id: current_user.id)
+  end
+end

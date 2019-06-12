@@ -1,0 +1,22 @@
+class Tweets::RetweetsController < ApplicationController
+  before_action :authenticate_user!
+  def new
+    @tweet = Tweet.find(params[:tweet_id])
+    @retweet = Tweet.new
+  end
+
+  def create
+    @retweet=Tweet.create(retweet_params)
+    unless @retweet.valid?
+      flash[:fail] = "Tweet #{@retweet.errors.messages[:content][0]}"
+      redirect_to new_tweet_retweet_path
+    else
+      redirect_to tweets_path
+    end
+  end
+
+  private
+  def retweet_params
+    params.require(:tweet).permit(:content).merge!(retweet_id:params[:tweet_id]).merge!(user_id: current_user.id)
+  end
+end
