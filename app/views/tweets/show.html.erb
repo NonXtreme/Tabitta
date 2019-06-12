@@ -11,5 +11,5 @@
     <%= f.button :submit, "Reply", class: "btn btn-primary" %>
   <% end %>
 <% else %>
-  <h1>404 Not Found</h1>
+  <% controller.redirect_to tweets_path %>
 <% end %>

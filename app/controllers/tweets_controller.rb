@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
     unless @tweet.valid?
       flash[:fail] = "Tweet #{@tweet.errors.messages[:content][0]}"
     end
-    redirect_to action: :index
+    redirect_back fallback_location: tweets_path
   end
 
   def show
@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweet=Tweet.find_by(id: params[:id],user_id: current_user.id)
     @tweet.destroy
-    redirect_to action: :index
+    redirect_back fallback_location: tweets_path
   end
 
   private
