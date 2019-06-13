@@ -1,1 +1,4 @@
 <h6>HASHTAG</h6>
+<% @hashtags.each do |name, count| %>
+  <p><%= "##{name}" %> <%= count %></p>
+<% end %>

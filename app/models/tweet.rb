@@ -12,7 +12,7 @@ class Tweet < ApplicationRecord
 
   def set_hashtag
     regex = /(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i
-    values = content.scan(regex).map{|h| h << id }
+    values = content.scan(regex).uniq.map{|h| h << id }
     columns = [ :name, :tweet_id ]
     Hashtag.import columns, values, validate: true
   end
