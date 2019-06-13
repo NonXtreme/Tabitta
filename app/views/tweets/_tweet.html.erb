@@ -1,37 +1,37 @@
-<div class="card" >
-  <div class="card-body">
-    <h5 class="card-title"><%=tweet.user.email%></h5>
-    <% if tweet.reply_id.present? %>
-      <% reply_to_tweet = Tweet.find_by(id:tweet.reply_id) %>
-      <% if reply_to_tweet.present? %>
-        <h6 class="card-subtitle mb-2 text-muted"><%= link_to "reply to #{Tweet.find_by(id:tweet.reply_id).user.email}", tweet_path(id:tweet.reply_id) %></h6>
-      <% else %>
-        <h6 class="card-subtitle mb-2 text-muted"><%= "reply to deleted tweet"%></h6>
+<% if defined?(tweet) && tweet.present? %>
+  <div class="card" >
+    <div class="card-body">
+      <h5 class="card-title"><%=tweet.user.email%></h5>
+      <% if tweet.reply_id.present? %>
+        <% reply_to_tweet = Tweet.find_by(id:tweet.reply_id) %>
+        <% if reply_to_tweet.present? %>
+          <h6 class="card-subtitle mb-2 text-muted"><%= link_to "reply to #{Tweet.find_by(id:tweet.reply_id).user.email}", tweet_path(id:tweet.reply_id) %></h6>
+        <% else %>
+          <h6 class="card-subtitle mb-2 text-muted"><%= "reply to deleted tweet"%></h6>
+        <% end %>
       <% end %>
-    <% end %>
-    <p class="card-text"><%=tweet.content%></p>
-    <% if has_retweet %>
-      <% if defined?(retweet) && retweet.present? %>
+      <p class="card-text"><%=tweet.content%></p>
+      <% if has_retweet %>
         <%= render '/tweets/tweet', tweet: retweet, has_retweet: false %>
-      <% else %>
-        <div class="card" >
-          <div class="card-body">
-            <p class="card-text">tweet unavailable</p>
-          </div>
-        </div>
+        <br/>
       <% end %>
-      <br/>
-    <% end %>
-    <%= Like.where(tweet_id:tweet.id).size%>
-    <% if like=Like.find_by(tweet_id:tweet.id, user_id:current_user.id) %>
-      <%= link_to '❤️', tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger" %>
-    <%else%>
-      <%= link_to '♡', tweet_likes_path(tweet), method: :post,:class => "btn btn-light" %>
-    <% end %>
-    <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary" %>
-    <% if current_user.id == tweet.user_id %>
-      <%= link_to '🗑️', tweet_path(tweet.id), method: :delete, :class => "btn btn-danger" %>
-    <% end %>
-    <%= link_to 'See more', tweet_path(tweet), :class => "btn btn-outline-primary" %>
+      <%= Like.where(tweet_id:tweet.id).size%>
+      <% if like=Like.find_by(tweet_id:tweet.id, user_id:current_user&.id) %>
+        <%= link_to '❤️', tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger" %>
+      <%else%>
+        <%= link_to '♡', tweet_likes_path(tweet), method: :post,:class => "btn btn-light" %>
+      <% end %>
+      <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary" %>
+      <% if current_user&.id == tweet.user_id %>
+        <%= link_to '🗑️', tweet_path(tweet.id), method: :delete, :class => "btn btn-danger" %>
+      <% end %>
+      <%= link_to 'See more', tweet_path(tweet), :class => "btn btn-outline-primary" %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="card" >
+    <div class="card-body">
+      <p class="card-text">tweet unavailable</p>
+    </div>
+  </div>
+<% end %>
