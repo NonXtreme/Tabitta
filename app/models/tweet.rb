@@ -6,7 +6,8 @@ class Tweet < ApplicationRecord
   paginates_per 5
   belongs_to :user
   has_many :likes, dependent: :destroy
-  has_many :hashtag_tweets, dependent: :destroy
+  has_many :hashtag_tweets
+  has_many :hashtags, through: :hashtag_tweets , dependent: :destroy
   has_one :retweet, class_name: "Tweet"
   has_one :reply, class_name: "Tweet"
 
