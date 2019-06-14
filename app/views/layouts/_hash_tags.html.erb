@@ -1,1 +1,4 @@
-<h6>HASHTAG</h6>
+<h3>Trending</h3>
+<% @hashtags.each do |hashtag, count| %>
+  <p><%= count %> <%= link_to "##{hashtag.name}", hashtag_path(hashtag) %></p>
+<% end %>

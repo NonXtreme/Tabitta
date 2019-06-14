@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :retweets, module: :tweets, only: [:new, :create]
     resources :replies, module: :tweets, only: [:create]
   end
+  resources :hashtags, only: [:show]
 
   root 'tweets#index'
 end

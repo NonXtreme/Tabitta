@@ -1,0 +1,7 @@
+<h1>#<%= @hashtag.name %></h1>
+<% @tweets.each do |tweet|%>
+  <% if has_retweet = tweet.retweet_id.present? %>
+      <% retweet = Tweet.find_by(id: tweet.retweet_id)%>
+  <% end %>
+  <%= render 'tweets/tweet', tweet: tweet, has_retweet: has_retweet, retweet: retweet %>
+<% end %>

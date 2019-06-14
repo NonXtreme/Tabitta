@@ -5,6 +5,7 @@
       input_html: { class: 'form-group', rows: 5, cols: 40 } %>
   <%= f.button :submit, "Tweet", class: "btn btn-primary" %>
 <% end %>
+<br/>
 <% @tweets.each do |tweet|%>
   <% if has_retweet = tweet.retweet_id.present? %>
       <% retweet = Tweet.find_by(id: tweet.retweet_id)%>
