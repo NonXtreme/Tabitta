@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HashtagTest < ActiveSupport::TestCase
+class HashtagsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

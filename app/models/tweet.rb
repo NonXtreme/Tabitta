@@ -6,14 +6,21 @@ class Tweet < ApplicationRecord
   paginates_per 5
   belongs_to :user
   has_many :likes, dependent: :destroy
-  has_many :hashtags, dependent: :destroy
+  has_many :hashtag_tweets, dependent: :destroy
   has_one :retweet, class_name: "Tweet"
   has_one :reply, class_name: "Tweet"
 
   def set_hashtag
     regex = /(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i
-    values = content.scan(regex).uniq.map{|h| h << id }
-    columns = [ :name, :tweet_id ]
-    Hashtag.import columns, values, validate: true
+    hashtags = content.scan(regex).uniq.flatten
+    values=[]
+    hashtags.each do |tag|
+      unless hashtag = Hashtag.find_by(name:tag)
+        hashtag = Hashtag.create(name:tag)
+      end
+      values << [hashtag.id, id]
+    end
+    columns = [ :hashtag_id, :tweet_id ]
+    HashtagTweet.import columns, values, validate: true
   end
 end

@@ -1,3 +1,3 @@
 class Hashtag < ApplicationRecord
-  belongs_to :tweet
+  has_many :hashtag_tweets
 end
