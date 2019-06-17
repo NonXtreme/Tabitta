@@ -13,10 +13,10 @@ class Tweet < ApplicationRecord
 
   def set_hashtag
     regex = /(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i
-    hashtags = content.scan(regex).uniq.flatten
+    hashtags = content.scan(regex).flatten.uniq { |elem| elem.downcase } 
     values=[]
     hashtags.each do |tag|
-      unless hashtag = Hashtag.find_by(name:tag)
+      unless hashtag = Hashtag.find_by("LOWER(name)= ?", tag.downcase)
         hashtag = Hashtag.create(name:tag)
       end
       values << [hashtag.id, id]

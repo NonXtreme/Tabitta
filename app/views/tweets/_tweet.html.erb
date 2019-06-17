@@ -13,7 +13,7 @@
       <% if tweet.retweet_id.present? %>
         <h6 class="card-subtitle mb-2 text-muted">retweet</h6>
       <% end %>
-      <p class="card-text"><%=tweet.content%></p>
+      <p class="card-text"><%=tweet.content.gsub(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i){|tag| "<a href=\"#{hashtag_path(tag.downcase.strip[1,tag.size])}\">#{tag}</a>"}.html_safe %></p>
       <% if has_retweet %>
         <%= render '/tweets/tweet', tweet: retweet, has_retweet: false %>
         <br/>
