@@ -1,11 +1,11 @@
 <% if defined?(tweet) && tweet.present? %>
   <div class="card" >
     <div class="card-body">
-      <h5 class="card-title"><%=tweet.user.email%></h5>
+      <h5 class="card-title"><%=tweet.user.name%></h5>
       <% if tweet.reply_id.present? %>
         <% reply_to_tweet = Tweet.find_by(id:tweet.reply_id) %>
         <% if reply_to_tweet.present? %>
-          <h6 class="card-subtitle mb-2 text-muted"><%= link_to "replying to #{Tweet.find_by(id:tweet.reply_id).user.email}", tweet_path(id:tweet.reply_id) %></h6>
+          <h6 class="card-subtitle mb-2 text-muted"><%= link_to "replying to #{Tweet.find_by(id:tweet.reply_id).user.name}", tweet_path(id:tweet.reply_id) %></h6>
         <% else %>
           <h6 class="card-subtitle mb-2 text-muted"><%= "replying to deleted tweet"%></h6>
         <% end %>
