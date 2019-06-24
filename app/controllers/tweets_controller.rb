@@ -1,7 +1,12 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   def index
-    @tweets=Tweet.all.order(created_at: :desc).page params[:page]
+    if user_signed_in?
+      following=Following.where(follower_id:current_user.id).map(&:followee_id).push(current_user.id)
+      @tweets = Tweet.where(user_id:following).order(created_at: :desc).page params[:page]
+    else
+      @tweets = Tweet.all.order(created_at: :desc).page params[:page]
+    end
   end
 
   def create

@@ -1,7 +1,7 @@
 <% if defined?(tweet) && tweet.present? %>
   <div class="card" >
     <div class="card-body">
-      <h5 class="card-title"><%=tweet.user.name%></h5>
+      <h5 class="card-title"><%= link_to tweet.user.name, user_path(tweet.user) %></h5>
       <% if tweet.reply_id.present? %>
         <% reply_to_tweet = Tweet.find_by(id:tweet.reply_id) %>
         <% if reply_to_tweet.present? %>
