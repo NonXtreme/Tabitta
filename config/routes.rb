@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :replies, module: :tweets, only: [:create]
   end
   resources :hashtags, only: [:show]
+  resources :users
 
   root 'tweets#index'
 end

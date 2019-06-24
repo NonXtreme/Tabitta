@@ -1,4 +1,8 @@
-<h3>Trending</h3>
-<% @hashtags.each do |hashtag, count| %>
-  <p><%= count %> <%= link_to "##{hashtag.name}", hashtag_path(hashtag) %></p>
-<% end %>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Trending</h5>
+    <% @hashtags.each do |hashtag, count| %>
+      <p><%= count %> <%= link_to "##{hashtag.name}", hashtag_path(hashtag) %></p>
+    <% end %>
+  </div>
+</div>
