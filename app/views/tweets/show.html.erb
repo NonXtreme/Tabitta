@@ -1,14 +1,16 @@
 <%if @tweet.present?%>
   <%= render 'tweet', tweet: @tweet, has_retweet: @has_retweet, retweet: @retweet %>
-  <h3>Replies</h3>
+  <h3 class="mt-3">Replies</h3>
   <% @replies.each do |reply|%>
     <%= render 'tweet', tweet: reply, has_retweet: false, retweet: false %>
   <%end%>
+  <%= paginate @replies %>
   <%= flash[:fail] %>
   <%= simple_form_for @reply, url: tweet_replies_path(tweet_id:params[:id]), method: :post do |f| %>
     <%= f.input :content, label: false, as: :text, row: 5, col: 20,
         input_html: { class: 'form-group', rows: 5, cols: 40 } %>
     <%= f.button :submit, "Reply", class: "btn btn-primary" %>
+    <%= f.hidden_field :tweet_user_id, value: @tweet.user_id %>
   <% end %>
 <% else %>
   <% controller.redirect_to tweets_path %>
