@@ -14,3 +14,4 @@
   <% end %>
   <%= render 'tweets/tweet', tweet: tweet, has_retweet: has_retweet, retweet: retweet %>
 <% end %>
+<%= paginate @tweets %>
