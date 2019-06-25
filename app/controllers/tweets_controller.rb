@@ -38,6 +38,10 @@ class TweetsController < ApplicationController
 
   private
   def tweet_params
-    params.require(:tweet).permit(:content).merge!(user_id: current_user.id)
+    unless params[:tweet][:anonymously] == '1'
+      params.require(:tweet).permit(:content).merge!(user_id: current_user.id)
+    else
+      params.require(:tweet).permit(:content).merge!(user_id: 1)
+    end
   end
 end
