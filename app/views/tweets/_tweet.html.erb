@@ -18,11 +18,12 @@
         <%= render '/tweets/tweet', tweet: retweet, has_retweet: false %>
         <br/>
       <% end %>
-      <%= Like.where(tweet_id:tweet.id).size%>
+      
+      <div id="like-count<%=tweet.id%>" class="d-inline"><%= Like.where(tweet_id:tweet.id).size%></div>
       <% if like=Like.find_by(tweet_id:tweet.id, user_id:current_user&.id) %>
-        <%= link_to '❤️', tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger" %>
+        <div id="like<%=tweet.id%>" class="d-inline"><%= link_to '❤️', tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger", :remote => true %></div>
       <%else%>
-        <%= link_to '♡', tweet_likes_path(tweet), method: :post,:class => "btn btn-light" %>
+        <div id="like<%=tweet.id%>" class="d-inline"><%= link_to '♡', tweet_likes_path(tweet), method: :post,:class => "btn btn-light", :remote => true %></div>
       <% end %>
       <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary" %>
       <% if current_user&.id == tweet.user_id %>

@@ -1,0 +1,2 @@
+$("#like<%= @tweet.id %>").html("<%= j link_to '♡', tweet_likes_path(@tweet), method: :post,:class => "btn btn-light", :remote => true %>")
+$("#like-count<%= @tweet.id %>").html("<%= j Like.where(tweet_id:@tweet.id).size.to_s %>")
