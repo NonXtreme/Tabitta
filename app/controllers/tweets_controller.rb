@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
   def show
     @tweet = Tweet.find_by(id: params[:id])
     if @tweet.present?
-      @replies = Tweet.where(reply_id: params[:id]).order(:created_at)
+      @replies = Tweet.where(reply_id: params[:id]).order(:created_at).page params[:page]
       @reply = Tweet.new
       @retweet = if @has_retweet = @tweet.retweet_id.present?
                    Tweet.find_by(id: @tweet.retweet_id)
