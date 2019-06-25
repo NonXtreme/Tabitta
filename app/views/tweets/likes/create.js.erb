@@ -1,2 +1,4 @@
-$("#like<%= @tweet.id %>").html("<%= j link_to '❤️', tweet_like_path(@tweet,@like), method: :delete,:class => "btn btn-outline-danger", :remote => true %>")
-$("#like-count<%= @tweet.id %>").html("<%= j Like.where(tweet_id:@tweet.id).size.to_s %>")
+<% if @success %>
+  $("#like<%= @tweet.id %>").html("<%= j link_to '❤️', tweet_like_path(@tweet,@like), method: :delete,:class => "btn btn-outline-danger", :remote => true %>")
+  $("#like-count<%= @tweet.id %>").html("<%= j Like.where(tweet_id:@tweet.id).size.to_s %>")
+<% end %>
