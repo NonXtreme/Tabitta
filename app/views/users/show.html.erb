@@ -1,6 +1,6 @@
 <h1><%= @user.name%></h1>
 <p><%= @user.email%></p>
-<% unless @user.id==current_user.id %>
+<% unless @user.id==current_user&.id %>
   <% if @follow.present? %>
     <%= link_to 'Following', user_following_path(@user,@follow), method: :delete,:class => "btn btn-outline-danger" %>
   <%else%>
