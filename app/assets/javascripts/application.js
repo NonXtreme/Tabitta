@@ -23,4 +23,8 @@ $(document).ready(function(){
     $('#tweet_content').val($('#tweet_content').val() + event.target.dataset.emoji);
   })
 
+  $('#emoji_button').click(function(event){
+    $("#emoji-picker").toggleClass("is-hidden")
+  })
+
 });

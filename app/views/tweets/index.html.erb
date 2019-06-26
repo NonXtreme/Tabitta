@@ -7,17 +7,20 @@
     <%= f.input :anonymously, as: :boolean %>
     <%= f.button :submit, "Tweet", class: "btn btn-primary" %>
   <% end %>
-
 <% else %>
   <h1>Global Tweets</h1>
 <% end %>
 
+<button id="emoji_button" class="btn btn-success" type="button">Emoji</button>
 
-<div id="emoji-picker" class='container'>
-  <% Emoji.all.each do |emoji| %>
-    <button class="d-inline btn btn-outline-primary emoji_select" data-emoji=<%= emoji.raw %>><%= emoji.raw %></button>
-  <% end %>
+<div id="emoji-picker" class="overflow-auto is-hidden emoji-popover container">
+  <div class="row">
+    <% Emoji.all.each do |emoji| %>
+      <div class="col-2"><button class="d-inline btn btn-block emoji_select" data-emoji=<%= emoji.raw %>><%= emoji.raw %></button></div>
+    <% end %>
+  </div>
 </div>
+
 <br/>
 <% @tweets.each do |tweet|%>
   <% if has_retweet = tweet.retweet_id.present? %>
