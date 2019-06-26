@@ -17,3 +17,14 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+
+$(document).ready(function(){
+  $('.emoji_select').click(function(event){
+    $('#tweet_content').val($('#tweet_content').val() + event.target.dataset.emoji);
+  })
+
+  $('#emoji_button').click(function(event){
+    $("#emoji-picker").toggleClass("is-hidden")
+  })
+
+});
