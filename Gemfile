@@ -76,3 +76,5 @@ gem 'kaminari'
 gem 'activerecord-import'
 
 gem 'friendly_id', '~> 5.2.4'
+
+gem 'gemoji'

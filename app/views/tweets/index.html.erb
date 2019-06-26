@@ -11,6 +11,13 @@
 <% else %>
   <h1>Global Tweets</h1>
 <% end %>
+
+
+<div id="emoji-picker" class='container'>
+  <% Emoji.all.each do |emoji| %>
+    <button class="d-inline btn btn-outline-primary emoji_select" data-emoji=<%= emoji.raw %>><%= emoji.raw %></button>
+  <% end %>
+</div>
 <br/>
 <% @tweets.each do |tweet|%>
   <% if has_retweet = tweet.retweet_id.present? %>
