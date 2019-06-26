@@ -18,7 +18,7 @@
 //= require popper
 //= require bootstrap-sprockets
 
-$(document).ready(function(){
+$(document).on('turbolinks:load',function(){
   $('.emoji_select').click(function(event){
     $('#tweet_content').val($('#tweet_content').val() + event.target.dataset.emoji);
   })
@@ -26,5 +26,4 @@ $(document).ready(function(){
   $('#emoji_button').click(function(event){
     $("#emoji-picker").toggleClass("is-hidden")
   })
-
 });
