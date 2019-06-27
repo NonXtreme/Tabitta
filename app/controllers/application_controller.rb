@@ -11,8 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_suggestions
-    suggest_user_ids=Following.where(followee_id:current_user.followee_ids).group(:follower_id).limit(5).order('count_all desc').count.keys - [current_user.id] - current_user.followee_ids
-    @suggested_users=User.where(id:suggest_user_ids)
+    if user_signed_in?
+      suggest_user_ids=Following.where(followee_id:current_user.followee_ids).group(:follower_id).limit(5).order('count_all desc').count.keys - [current_user.id] - current_user.followee_ids
+      @suggested_users=User.where(id:suggest_user_ids)
+    end
   end
 
   protected

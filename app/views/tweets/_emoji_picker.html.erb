@@ -1,0 +1,8 @@
+<button id="emoji_button" class="btn btn-success d-inline" type="button">😀</button>
+<div id="emoji-picker" class="overflow-auto is-hidden emoji-popover container">
+  <div class="row">
+    <% Emoji.all.each do |emoji| %>
+      <div class="col-2"><button type="button" class="d-inline btn btn-block emoji_select" data-emoji=<%= emoji.raw %>><%= emoji.raw %></button></div>
+    <% end %>
+  </div>
+</div>

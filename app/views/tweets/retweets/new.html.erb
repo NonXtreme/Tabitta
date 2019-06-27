@@ -9,6 +9,7 @@
             input_html: { class: 'form-group', rows: 5, cols: 40 } %>
         <%= render '/tweets/tweet', tweet: @tweet, has_retweet: false %>
         <br/>
+        <%= render 'tweets/emoji_picker' %>
         <%= f.button :submit, "Retweet", class: "btn btn-primary" %>
       <% end %>
     </p>
