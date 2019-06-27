@@ -8,5 +8,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :tweets
   has_many :likes
-  has_many :followings
+  has_many :followee_ids, class_name:  "Following",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :followees, through: :followee_ids
+  has_many :follower_ids, class_name:  "Following",
+                                  foreign_key: "followee_id",
+                                  dependent:   :destroy
+  has_many :followers, through: :follower_ids
 end

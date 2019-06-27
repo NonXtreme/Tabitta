@@ -1,0 +1,8 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Suggestion</h5>
+    <% @suggested_users.each do |user| %>
+      <p><%= link_to user.name, user_path(user) %></p>
+    <% end %>
+  </div>
+</div>
