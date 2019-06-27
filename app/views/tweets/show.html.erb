@@ -9,6 +9,7 @@
   <%= simple_form_for @reply, url: tweet_replies_path(tweet_id:params[:id]), method: :post do |f| %>
     <%= f.input :content, label: false, as: :text, row: 5, col: 20,
         input_html: { class: 'form-group', rows: 5, cols: 40 } %>
+    <%= render 'tweets/emoji_picker' %>
     <%= f.button :submit, "Reply", class: "btn btn-primary" %>
     <%= f.hidden_field :tweet_user_id, value: @tweet.user_id %>
   <% end %>

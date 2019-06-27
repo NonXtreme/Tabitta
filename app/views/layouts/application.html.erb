@@ -20,7 +20,7 @@
           <%= yield %>
         </div>
         <div class="col-md-2">
-          <%= render 'layouts/suggestion'%>
+          <%= render 'layouts/suggestion' if user_signed_in?%>
         </div>
       </div>
     </div>
