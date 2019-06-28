@@ -8,6 +8,9 @@
     <ul class="navbar-nav mr-auto">
         <%= link_to "Anonymous", anonymouses_path, class: "text-white" %>
     </ul>
+    <ul class="navbar-nav mr-auto">
+        <%= link_to "Search", search_index_path, class: "text-white" %>
+    </ul>
     <ul class="navbar-nav mr-3 navbar-right">
       <%= link_to current_user&.name, user_path(current_user&.id), class: "text-white"  if current_user.present? %>
     </ul>

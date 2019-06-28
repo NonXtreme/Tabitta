@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :followings, module: :users, only: [:create, :destroy]
   end
   resources :anonymouses, only: [:index]
+  resources :search, :only => :index
 
   root 'tweets#index'
 end
