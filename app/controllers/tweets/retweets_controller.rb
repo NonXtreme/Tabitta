@@ -3,7 +3,8 @@
 class Tweets::RetweetsController < ApplicationController
   before_action :authenticate_user!
   def new
-    @tweet = Tweet.includes({reply: :user} , :user, :likes).find(params[:tweet_id])
+    @tweet = Tweet.includes({reply: :user} , :user, :likes).find_by(id:params[:tweet_id])
+    redirect_to tweets_path unless @tweet
     @retweet = Tweet.new
   end
 
