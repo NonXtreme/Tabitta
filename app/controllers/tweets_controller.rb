@@ -5,28 +5,27 @@ class TweetsController < ApplicationController
   def index
     if user_signed_in?
       following = Following.where(follower_id: current_user.id).pluck(:followee_id).push(current_user.id)
-      @tweets = Tweet.where(user_id: following).order(created_at: :desc).page params[:page]
+      @tweets = Tweet.where(user_id: following).includes({retweet: [:likes, :user]}, {reply: :user} , :user, :likes).order(created_at: :desc).page params[:page]
     else
-      @tweets = Tweet.all.order(created_at: :desc).page params[:page]
+      @tweets = Tweet.all.includes({retweet: [:likes, :user]}, {reply: :user} , :user, :likes).order(created_at: :desc).page params[:page]
     end
   end
 
   def create
     @tweet = Tweet.create(tweet_params)
     unless @tweet.valid?
-      flash[:fail] = "Tweet #{@tweet.errors.messages[:content][0]}"
+      flash[:fail] = "Tweet #{@tweet.errors.messages[:content].first}"
     end
     redirect_back fallback_location: tweets_path
   end
 
   def show
-    @tweet = Tweet.find_by(id: params[:id])
+    @tweet = Tweet.includes({retweet: [:likes, :user]}, {reply: :user} , :user, :likes).find_by(id: params[:id])
     if @tweet.present?
-      @replies = Tweet.where(reply_id: params[:id]).order(:created_at).page params[:page]
+      @replies = Tweet.includes(:user, :likes).where(reply_id: params[:id]).order(:created_at).page params[:page]
       @reply = Tweet.new
-      @retweet = if @has_retweet = @tweet.retweet_id.present?
-                   Tweet.find_by(id: @tweet.retweet_id)
-                 end
+    else
+      redirect_to tweets_path
     end
   end
 
