@@ -3,7 +3,8 @@
 class Tweets::RetweetsController < ApplicationController
   before_action :authenticate_user!
   def new
-    @tweet = Tweet.find(params[:tweet_id])
+    @tweet = Tweet.includes({reply: :user} , :user, :likes).find_by(id:params[:tweet_id])
+    redirect_to tweets_path unless @tweet
     @retweet = Tweet.new
   end
 
@@ -12,7 +13,7 @@ class Tweets::RetweetsController < ApplicationController
     if @retweet.valid?
       redirect_to tweets_path
     else
-      flash[:fail] = "Tweet #{@retweet.errors.messages[:content][0]}"
+      flash[:fail] = "Tweet #{@retweet.errors.messages[:content].first}"
       redirect_to new_tweet_retweet_path
     end
   end

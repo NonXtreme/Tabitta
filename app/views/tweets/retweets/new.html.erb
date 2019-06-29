@@ -1,13 +1,13 @@
 <h1>Retweets</h1>
 <div class="card" >
   <div class="card-body">
-    <h5 class="card-title"><%= current_user.email %></h5>
+    <h5 class="card-title"><%= current_user.name %></h5>
     <p class="card-text">
       <%= flash[:fail] %>
       <%= simple_form_for @retweet, url: tweet_retweets_path, method: :post do |f| %>
         <%= f.input :content, label: false, as: :text, row: 5, col: 20,
             input_html: { class: 'form-group', rows: 5, cols: 40 } %>
-        <%= render '/tweets/tweet', tweet: @tweet, has_retweet: false %>
+        <%= render '/tweets/tweet', tweet: @tweet, has_retweet: false, has_reply:@tweet.reply_id.present? %>
         <br/>
         <%= render 'tweets/emoji_picker' %>
         <%= f.button :submit, "Retweet", class: "btn btn-primary" %>

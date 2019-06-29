@@ -6,7 +6,7 @@ class Tweets::RepliesController < ApplicationController
   def create
     @reply = Tweet.create(reply_params)
     unless @reply.valid?
-      flash[:fail] = "Tweet #{@reply.errors.messages[:content][0]}"
+      flash[:fail] = "Tweet #{@reply.errors.messages[:content].first}"
     end
     redirect_to tweet_path(params[:tweet_id])
   end

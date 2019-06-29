@@ -9,9 +9,9 @@ class SearchController < ApplicationController
       end
     else
       if params[:keyword].present?
-        @tweets = Tweet.where('content ILIKE ?', "%#{params[:keyword]}%").order(created_at: :desc).page params[:page]
+        @tweets = Tweet.includes({retweet: [:likes, :user]}, {reply: :user} , :user, :likes).where('content ILIKE ?', "%#{params[:keyword]}%").order(created_at: :desc).page params[:page]
       else
-        @tweets = Tweet.all.order(created_at: :desc).page params[:page]
+        @tweets = Tweet.includes({retweet: [:likes, :user]}, {reply: :user} , :user, :likes).all.order(created_at: :desc).page params[:page]
       end
     end
   end
