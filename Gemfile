@@ -72,3 +72,9 @@ gem 'pry-byebug'
 gem 'simple_form', '~> 4.1.0'
 
 gem 'kaminari'
+
+gem 'activerecord-import'
+
+gem 'friendly_id', '~> 5.2.4'
+
+gem 'gemoji'

@@ -1,3 +1,19 @@
 // Place all the styles related to the tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.is-hidden {
+  display: none;
+}
+
+.emoji-popover {
+
+  position: absolute;
+  height: 25rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.25);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  z-index: 1;
+  background-color: #fff;
+  padding: 1rem 1rem 2rem;
+}

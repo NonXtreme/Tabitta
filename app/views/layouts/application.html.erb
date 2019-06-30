@@ -11,12 +11,17 @@
 
   <body>
     <%= render 'layouts/navbar'%>
-    <div class="row">
-      <div class="col-2">
-        <%= render 'layouts/hash_tags'%>
-      </div>
-      <div class="col">
-        <%= yield %>
+    <div class="container body">
+      <div class="row">
+        <div class="col-md-2">
+          <%= render 'layouts/hash_tags'%>
+        </div>
+        <div class="col-md-8">
+          <%= yield %>
+        </div>
+        <div class="col-md-2">
+          <%= render 'layouts/suggestion' if user_signed_in?%>
+        </div>
       </div>
     </div>
   </body>

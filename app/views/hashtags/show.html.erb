@@ -1,0 +1,4 @@
+<h1>#<%= @hashtag.name %></h1>
+<% @tweets.each do |tweet|%>
+  <%= render 'tweets/tweet', tweet: tweet, has_retweet: tweet.retweet_id.present?, has_reply: tweet.reply_id.present? %>
+<%end%>

@@ -1,0 +1,3 @@
+<% if @success %>
+  $("#like<%= @tweet.id %>").html("<%= j link_to "#{@tweet.likes.size}♡", tweet_likes_path(@tweet), method: :post,:class => "btn btn-light", :remote => true %>")
+<% end %>
