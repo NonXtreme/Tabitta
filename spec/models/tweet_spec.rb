@@ -7,12 +7,12 @@ RSpec.describe Tweet, type: :model do
   subject (:valid_retweet){ described_class.create({:content => "A retweet", :user_id => user.id, :retweet_id => valid_tweet.id }) }
   subject (:valid_reply){ described_class.create({:content => "A reply", :user_id => user.id, :reply_id => valid_tweet.id}) }
 
-  describe 'validations' do
+  describe 'factory' do
     it 'has a valid user' do
       expect(user).to be_valid
     end
 
-    it 'is a valid tweet' do
+    it 'has a valid tweet' do
       expect(valid_tweet).to be_valid
     end
 
@@ -23,6 +23,9 @@ RSpec.describe Tweet, type: :model do
     it 'has a valid reply' do
       expect(valid_reply).to be_valid
     end
+  end
+
+  describe 'validations' do
 
     it 'is valid without a content if it is a retweet' do
       valid_retweet.content=""
