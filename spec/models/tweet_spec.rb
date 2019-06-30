@@ -51,7 +51,7 @@ RSpec.describe Tweet, type: :model do
 
     it { should have_many(:hashtag_tweets).dependent(:destroy) } 
     
-    it { should have_many(:hashtags).dependent(:destroy) } 
+    it { should have_many(:hashtags).through(:hashtag_tweets).dependent(:destroy) } 
 
     it { should belong_to(:retweet).optional() } 
 
