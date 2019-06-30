@@ -6,8 +6,8 @@ class User < ApplicationRecord
   validates :name, uniqueness: true, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :tweets
-  has_many :likes
+  has_many :tweets, dependent:   :destroy
+  has_many :likes, dependent:   :destroy
   has_many :followee_ids, class_name:  "Following",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
