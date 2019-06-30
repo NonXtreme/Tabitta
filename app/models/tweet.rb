@@ -9,7 +9,7 @@ class Tweet < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :hashtag_tweets, dependent: :destroy
-  has_many :hashtags, through: :hashtag_tweets, dependent: :destroy
+  has_many :hashtags, through: :hashtag_tweets
   belongs_to :retweet, class_name: 'Tweet', optional: true
   belongs_to :reply, class_name: 'Tweet', optional: true
 
