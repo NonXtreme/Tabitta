@@ -1,5 +1,4 @@
 <% if defined?(tweet) && tweet.present? %>
-<% puts "TWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEET #{tweet.content}"%>
   <div class="card" >
     <div class="card-body">
       <h5 class="card-title"><%= link_to tweet.user.name, user_path(tweet.user) %></h5>
