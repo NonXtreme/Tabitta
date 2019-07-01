@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :hashtags, only: [:show]
   resources :users do
     resources :followings, module: :users, only: [:create, :destroy]
+    get :followers
+    get :followees
   end
   resources :anonymouses, only: [:index]
   resources :search, :only => :index
