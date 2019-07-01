@@ -17,21 +17,25 @@
         <%= render '/tweets/tweet', tweet: tweet.retweet, has_retweet: false, has_reply: false %>
         <br/>
       <% end %>
-      
-      <% if user_signed_in? %>
-        <% if like=tweet.likes.find{|like| like.user_id == current_user&.id} %>
-          <div class="d-inline like<%=tweet.id%>"><%= link_to "#{tweet.likes.size}❤️", tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger", :remote => true %></div>
-        <%else%>
-          <div class="d-inline like<%=tweet.id%>"><%= link_to "#{tweet.likes.size}♡", tweet_likes_path(tweet), method: :post,:class => "btn btn-light", :remote => true %></div>
+
+
+      <div class="d-flex flex-row">
+        <% if user_signed_in? %>
+          <% if like=tweet.likes.find{|like| like.user_id == current_user&.id} %>
+            <div class="d-inline like<%=tweet.id%>"><%= link_to "#{tweet.likes.size}❤️", tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger", :remote => true %></div>
+          <%else%>
+            <div class="d-inline like<%=tweet.id%>"><%= link_to "#{tweet.likes.size}♡", tweet_likes_path(tweet), method: :post,:class => "btn btn-light", :remote => true %></div>
+          <% end %>
+        <% else %>
+          <div class="d-inline"><%= link_to "#{tweet.likes.size}♡", new_user_session_path ,:class => "btn btn-light" %></div>
         <% end %>
-      <% else %>
-        <div class="d-inline"><%= link_to "#{tweet.likes.size}♡", new_user_session_path ,:class => "btn btn-light" %></div>
-      <% end %>
-      <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary" %>
-      <% if current_user&.id == tweet.user_id %>
-        <%= link_to '🗑️', tweet_path(tweet.id), method: :delete, :class => "btn btn-danger" %>
-      <% end %>
-      <%= link_to 'See more', tweet_path(tweet), :class => "btn btn-outline-primary" %>
+        <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary ml-1" %>
+        <%= link_to 'Replies', tweet_path(tweet), :class => "btn btn-outline-primary ml-1" %>
+        <% if current_user&.id == tweet.user_id %>
+          <%= link_to '🗑️', tweet_path(tweet.id), method: :delete, :class => "btn btn-danger ml-auto" %>
+        <% end %>
+
+      </div>
     </div>
   </div>
 <% else %>
