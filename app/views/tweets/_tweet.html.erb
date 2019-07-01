@@ -19,10 +19,14 @@
         <br/>
       <% end %>
       
-      <% if like=tweet.likes.find{|like| like.user_id == current_user&.id} %>
-        <div id="like<%=tweet.id%>" class="d-inline"><%= link_to "#{tweet.likes.size}❤️", tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger", :remote => true %></div>
-      <%else%>
-        <div id="like<%=tweet.id%>" class="d-inline"><%= link_to "#{tweet.likes.size}♡", tweet_likes_path(tweet), method: :post,:class => "btn btn-light", :remote => true %></div>
+      <% if user_signed_in? %>
+        <% if like=tweet.likes.find{|like| like.user_id == current_user&.id} %>
+          <div class="d-inline like<%=tweet.id%>"><%= link_to "#{tweet.likes.size}❤️", tweet_like_path(tweet,like), method: :delete,:class => "btn btn-outline-danger", :remote => true %></div>
+        <%else%>
+          <div class="d-inline like<%=tweet.id%>"><%= link_to "#{tweet.likes.size}♡", tweet_likes_path(tweet), method: :post,:class => "btn btn-light", :remote => true %></div>
+        <% end %>
+      <% else %>
+        <div class="d-inline"><%= link_to "#{tweet.likes.size}♡", new_user_session_path ,:class => "btn btn-light" %></div>
       <% end %>
       <%= link_to '🔄', new_tweet_retweet_path(tweet), :class => "btn btn-outline-primary" %>
       <% if current_user&.id == tweet.user_id %>
